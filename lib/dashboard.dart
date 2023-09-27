@@ -126,7 +126,7 @@ Future<void> savechanges(BuildContext context) async {
     var resp;
     try {
       String uri =
-          "http://10.5.116.179/task_management_systems_api/updateduser.php";
+          "http://192.168.100.73/task_management_systems_api/updateduser.php";
       res = await http.post(Uri.parse(uri), body: {
         "Id": Ids.toString(),
         "Old_Email": Email.text,
@@ -155,7 +155,7 @@ Future<void> savechanges(BuildContext context) async {
       print(resp.body);
 
       String uris =
-          "http://10.5.116.179/task_management_systems_api/insertlog.php";
+          "http://192.168.100.73/task_management_systems_api/insertlog.php";
       var res = await http.post(Uri.parse(uris), body: {
         "Log_Title": resp.body.toString(),
         "From_Table": "Users",
@@ -177,7 +177,7 @@ Future<void> categoryadd(BuildContext context) async {
   if (Ids != "" && Category.text != "") {
     try {
       String uri =
-          "http://10.5.116.179/task_management_systems_api/insertcategory.php";
+          "http://192.168.100.73/task_management_systems_api/insertcategory.php";
       res = await http.post(Uri.parse(uri), body: {
         "category_name": Category.text,
         "User_Id": Users_Id.toString(),
@@ -193,7 +193,7 @@ Future<void> categoryadd(BuildContext context) async {
     } catch (e) {
       showTextDialog(context, e.toString());
       String uris =
-          "http://10.5.116.179/task_management_systems_api/insertlog.php";
+          "http://192.168.100.73/task_management_systems_api/insertlog.php";
       var res = await http.post(Uri.parse(uris), body: {
         "Log_Title": resp.body.toString(),
         "From_Table": "Category",
@@ -211,7 +211,7 @@ Future<void> searchtask(BuildContext context) async {
   if (Ids != 0 && search.text != "") {
     try {
       String uri =
-          "http://10.5.116.179/task_management_systems_api/searchtask.php";
+          "http://192.168.100.73/task_management_systems_api/searchtask.php";
       response = await http.post(
         Uri.parse(uri),
         body: {
@@ -250,7 +250,7 @@ Future<void> searchtask(BuildContext context) async {
     } catch (e) {
       showTextDialog(context, e.toString());
       String uris =
-          "http://10.5.116.179/task_management_systems_api/insertlog.php";
+          "http://192.168.100.73/task_management_systems_api/insertlog.php";
       var res = await http.post(Uri.parse(uris), body: {
         "Log_Title": resp.body.toString(),
         "From_Table": "Task",
@@ -353,7 +353,7 @@ Future<void> gettaskcategory(BuildContext context) async {
 
   try {
     String uri =
-        "http://10.5.116.179/task_management_systems_api/gettaskcategory.php";
+        "http://192.168.100.73/task_management_systems_api/gettaskcategory.php";
     res = await http.post(Uri.parse(uri), body: {
       "Users_Id": Users_Id.toString(),
     });
@@ -376,7 +376,7 @@ Future<void> gettaskcategory(BuildContext context) async {
         if (Users_Id != 0 && task_name != "") {
           try {
             String uri =
-                "http://10.5.116.179/task_management_systems_api/searchtask.php";
+                "http://192.168.100.73/task_management_systems_api/searchtask.php";
             response = await http.post(
               Uri.parse(uri),
               body: {
@@ -419,7 +419,7 @@ Future<void> gettaskcategory(BuildContext context) async {
           var dps;
           try {
             String uri =
-                "http://10.5.116.179/task_management_systems_api/deletescheduletask.php";
+                "http://192.168.100.73/task_management_systems_api/deletescheduletask.php";
             dp = await http.post(Uri.parse(uri), body: {
               "created_at": created_at.toString(),
             });

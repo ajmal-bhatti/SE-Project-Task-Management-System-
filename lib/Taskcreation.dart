@@ -94,7 +94,7 @@ Future<void> createtask(BuildContext context) async {
       }
 
       String uri =
-          "http://10.5.116.179/task_management_systems_api/inserttask.php";
+          "http://192.168.100.73/task_management_systems_api/inserttask.php";
       res = await http.post(Uri.parse(uri), body: {
         "Title": Title.text,
         "Description": Description.text,
@@ -118,7 +118,7 @@ Future<void> createtask(BuildContext context) async {
       showTextDialog(context, e.toString());
       print(resp.body);
       String uris =
-          "http://10.5.116.179/task_management_systems_api/insertlog.php";
+          "http://192.168.100.73/task_management_systems_api/insertlog.php";
       var res = await http.post(Uri.parse(uris), body: {
         "Log_Title": resp.body.toString(),
         "From_Table": "Task",

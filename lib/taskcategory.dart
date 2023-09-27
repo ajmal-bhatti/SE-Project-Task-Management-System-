@@ -96,7 +96,7 @@ Future<void> givedata(String selectedtask, String selectedcategory) async {
       dateController.text != "") {
     try {
       String uri =
-          "http://10.5.116.179/task_management_systems_api/inserttaskcategory.php";
+          "http://192.168.100.73/task_management_systems_api/inserttaskcategory.php";
       res = await http.post(Uri.parse(uri), body: {
         "task_name": selectedtask,
         "task_category": selectedcategory,
@@ -115,7 +115,7 @@ Future<void> givedata(String selectedtask, String selectedcategory) async {
       print(e.toString());
       print(resp.body);
       String uris =
-          "http://10.5.116.179/task_management_systems_api/insertlog.php";
+          "http://192.168.100.73/task_management_systems_api/insertlog.php";
       var res = await http.post(Uri.parse(uris), body: {
         "Log_Title": resp.body.toString(),
         "From_Table": "Task_Category",
@@ -162,7 +162,7 @@ class _TaskSelectionScreenState extends State<TaskSelectionScreen> {
     if (userId != 0) {
       try {
         String uri =
-            "http://10.5.116.179/task_management_systems_api/gettask.php";
+            "http://192.168.100.73/task_management_systems_api/gettask.php";
         res = await http.post(Uri.parse(uri), body: {
           "Users_Id": userId.toString(),
         });
@@ -187,7 +187,7 @@ class _TaskSelectionScreenState extends State<TaskSelectionScreen> {
         print(e);
         print(response?.body);
         String uris =
-            "http://10.5.116.179/task_management_systems_api/insertlog.php";
+            "http://192.168.100.73/task_management_systems_api/insertlog.php";
         var res = await http.post(Uri.parse(uris), body: {
           "Log_Title": resp.body.toString(),
           "From_Table": "Task",
@@ -207,7 +207,7 @@ class _TaskSelectionScreenState extends State<TaskSelectionScreen> {
     if (userId != 0) {
       try {
         String uri =
-            "http://10.5.116.179/task_management_systems_api/getcategory.php";
+            "http://192.168.100.73/task_management_systems_api/getcategory.php";
         res = await http.post(Uri.parse(uri), body: {
           "Users_Id": userId.toString(),
         });
@@ -232,7 +232,7 @@ class _TaskSelectionScreenState extends State<TaskSelectionScreen> {
         print(e);
         print(response?.body);
         String uris =
-            "http://10.5.116.179/task_management_systems_api/insertlog.php";
+            "http://192.168.100.73/task_management_systems_api/insertlog.php";
         var res = await http.post(Uri.parse(uris), body: {
           "Log_Title": resp.body.toString(),
           "From_Table": "Category",

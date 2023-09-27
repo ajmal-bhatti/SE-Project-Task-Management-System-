@@ -113,7 +113,7 @@ class _DashBoardScreenState extends State<DashBoardScreen>
     var response;
     if (Emailz != "" && Passwordz != "") {
       String apiUrl =
-          "http://10.5.116.179/task_management_systems_api/validuser.php";
+          "http://192.168.100.73/task_management_systems_api/validuser.php";
 
       try {
         response = await http.post(
@@ -123,7 +123,6 @@ class _DashBoardScreenState extends State<DashBoardScreen>
             'Password': Passwords.text,
           },
         );
-
         var resp = jsonDecode(response.body);
         if (resp["Exists"] == "true") {
           var Id = resp["Id"];
@@ -152,6 +151,7 @@ class _DashBoardScreenState extends State<DashBoardScreen>
         }
       } catch (e) {
         showTextDialog(context, e.toString());
+        print(response.body);
       }
     }
   }
@@ -166,7 +166,7 @@ class _DashBoardScreenState extends State<DashBoardScreen>
 
     try {
       String uri =
-          "http://10.5.116.179/task_management_systems_api/gettaskcategory.php";
+          "http://192.168.100.73/task_management_systems_api/gettaskcategory.php";
       res = await http.post(Uri.parse(uri), body: {
         "Users_Id": Users_Id.toString(),
       });
@@ -189,7 +189,7 @@ class _DashBoardScreenState extends State<DashBoardScreen>
           if (Users_Id != 0 && task_name != "") {
             try {
               String uri =
-                  "http://10.5.116.179/task_management_systems_api/searchtask.php";
+                  "http://192.168.100.73/task_management_systems_api/searchtask.php";
               response = await http.post(
                 Uri.parse(uri),
                 body: {

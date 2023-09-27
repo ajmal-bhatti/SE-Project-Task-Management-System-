@@ -43,7 +43,7 @@ void _submitFeedback(BuildContext context) async {
   if (_feedbackController.text != "") {
     try {
       String uri =
-          "http://10.5.116.179/task_management_systems_api/insertfeedback.php";
+          "http://192.168.100.73/task_management_systems_api/insertfeedback.php";
       res = await http.post(Uri.parse(uri), body: {
         "feedback": _feedbackController.text,
       });

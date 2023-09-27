@@ -11,7 +11,7 @@ void deleteschedule(BuildContext context, String created_at) async {
   var dps;
   try {
     String uri =
-        "http://10.5.116.179/task_management_systems_api/deletescheduletask.php";
+        "http://192.168.100.73/task_management_systems_api/deletescheduletask.php";
     dp = await http.post(Uri.parse(uri), body: {
       "created_at": created_at.toString(),
     });
@@ -27,7 +27,7 @@ void deleteschedule(BuildContext context, String created_at) async {
     print(dps.body);
 
     String uris =
-        "http://10.5.116.179/task_management_systems_api/insertlog.php";
+        "http://192.168.100.73/task_management_systems_api/insertlog.php";
     var res = await http.post(Uri.parse(uris), body: {
       "Log_Title": dps.body.toString(),
       "From_Table": "Schedule_Task",
