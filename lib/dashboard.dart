@@ -11,6 +11,7 @@ import 'package:http/http.dart' as http;
 import 'package:app/main.dart';
 import 'dart:convert';
 import 'package:app/main.dart';
+import 'package:app/feedback.dart';
 
 void main() {
   runApp(MyApp());
@@ -99,7 +100,7 @@ void showTextDialog(BuildContext context, String text) {
 }
 
 void navigateToTaskUpdateScreen(BuildContext context) {}
-
+//This function is used to show the dialog box for the save changes
 Future<void> savechanges(BuildContext context) async {
   print('Id: $Ids');
   print(new_Email.text);
@@ -125,7 +126,7 @@ Future<void> savechanges(BuildContext context) async {
     var resp;
     try {
       String uri =
-          "http://192.168.100.73/task_management_systems_api/updateduser.php";
+          "http://10.5.116.179/task_management_systems_api/updateduser.php";
       res = await http.post(Uri.parse(uri), body: {
         "Id": Ids.toString(),
         "Old_Email": Email.text,
@@ -154,7 +155,7 @@ Future<void> savechanges(BuildContext context) async {
       print(resp.body);
 
       String uris =
-          "http://192.168.100.73/task_management_systems_api/insertlog.php";
+          "http://10.5.116.179/task_management_systems_api/insertlog.php";
       var res = await http.post(Uri.parse(uris), body: {
         "Log_Title": resp.body.toString(),
         "From_Table": "Users",
@@ -165,6 +166,7 @@ Future<void> savechanges(BuildContext context) async {
   }
 }
 
+//This function is used to add category
 Future<void> categoryadd(BuildContext context) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   int Users_Id = prefs.getInt('Id') ?? 0;
@@ -175,7 +177,7 @@ Future<void> categoryadd(BuildContext context) async {
   if (Ids != "" && Category.text != "") {
     try {
       String uri =
-          "http://192.168.100.73/task_management_systems_api/insertcategory.php";
+          "http://10.5.116.179/task_management_systems_api/insertcategory.php";
       res = await http.post(Uri.parse(uri), body: {
         "category_name": Category.text,
         "User_Id": Users_Id.toString(),
@@ -191,7 +193,7 @@ Future<void> categoryadd(BuildContext context) async {
     } catch (e) {
       showTextDialog(context, e.toString());
       String uris =
-          "http://192.168.100.73/task_management_systems_api/insertlog.php";
+          "http://10.5.116.179/task_management_systems_api/insertlog.php";
       var res = await http.post(Uri.parse(uris), body: {
         "Log_Title": resp.body.toString(),
         "From_Table": "Category",
@@ -202,13 +204,14 @@ Future<void> categoryadd(BuildContext context) async {
   }
 }
 
+//this function is used to search the task
 Future<void> searchtask(BuildContext context) async {
   var resp;
   var response;
   if (Ids != 0 && search.text != "") {
     try {
       String uri =
-          "http://192.168.100.73/task_management_systems_api/searchtask.php";
+          "http://10.5.116.179/task_management_systems_api/searchtask.php";
       response = await http.post(
         Uri.parse(uri),
         body: {
@@ -247,7 +250,7 @@ Future<void> searchtask(BuildContext context) async {
     } catch (e) {
       showTextDialog(context, e.toString());
       String uris =
-          "http://192.168.100.73/task_management_systems_api/insertlog.php";
+          "http://10.5.116.179/task_management_systems_api/insertlog.php";
       var res = await http.post(Uri.parse(uris), body: {
         "Log_Title": resp.body.toString(),
         "From_Table": "Task",
@@ -258,6 +261,7 @@ Future<void> searchtask(BuildContext context) async {
   }
 }
 
+//this function is used to update the task
 Future<void> updatetask(BuildContext context) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   Ids = prefs.getInt('Id') ?? 0;
@@ -285,6 +289,7 @@ Future<void> updatetask(BuildContext context) async {
   );
 }
 
+//this function is used to show the dialog box.
 Future<void> showSettingsDialog(BuildContext context) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   Ids = prefs.getInt('Id') ?? 0;
@@ -338,6 +343,7 @@ Future<void> showSettingsDialog(BuildContext context) async {
   );
 }
 
+//This function is used to get the task category
 Future<void> gettaskcategory(BuildContext context) async {
   Tasks.clear();
   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -347,7 +353,7 @@ Future<void> gettaskcategory(BuildContext context) async {
 
   try {
     String uri =
-        "http://192.168.100.73/task_management_systems_api/gettaskcategory.php";
+        "http://10.5.116.179/task_management_systems_api/gettaskcategory.php";
     res = await http.post(Uri.parse(uri), body: {
       "Users_Id": Users_Id.toString(),
     });
@@ -370,7 +376,7 @@ Future<void> gettaskcategory(BuildContext context) async {
         if (Users_Id != 0 && task_name != "") {
           try {
             String uri =
-                "http://192.168.100.73/task_management_systems_api/searchtask.php";
+                "http://10.5.116.179/task_management_systems_api/searchtask.php";
             response = await http.post(
               Uri.parse(uri),
               body: {
@@ -413,7 +419,7 @@ Future<void> gettaskcategory(BuildContext context) async {
           var dps;
           try {
             String uri =
-                "http://192.168.100.73/task_management_systems_api/deletescheduletask.php";
+                "http://10.5.116.179/task_management_systems_api/deletescheduletask.php";
             dp = await http.post(Uri.parse(uri), body: {
               "created_at": created_at.toString(),
             });
@@ -457,6 +463,7 @@ Future<void> gettaskcategory(BuildContext context) async {
   );
 }
 
+//This function is used to add the category
 Future<void> category(BuildContext context) async {
   showDialog(
     context: context,
@@ -563,6 +570,17 @@ class DashboardPage extends StatelessWidget {
               leading: Icon(Icons.settings),
               title: Text('Settings'),
               onTap: () => showSettingsDialog(context),
+            ),
+            ListTile(
+              leading: Icon(Icons.feedback),
+              title: Text('Feedback'),
+              onTap: () {
+                // Pop from the current screen to return to the first screen
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => FeedbackScreen()),
+                );
+              },
             ),
             ListTile(
               leading: Icon(Icons.logout),

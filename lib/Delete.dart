@@ -46,7 +46,7 @@ class _DeleteUserPageState extends State<DeleteUserPage> {
     String username = _userIdController.text;
     var res;
     print('Username: $username');
-    final String apiUrl = "http://192.168.100.73/practice_api/deleterecord.php";
+    final String apiUrl = "http://10.5.116.179/practice_api/deleterecord.php";
     if (username != "") {
       try {
         final response = await http.delete(

@@ -33,7 +33,7 @@ Future<void> getTaskCategory(BuildContext context) async {
 
     if (userId != 0) {
       String categoryUri =
-          "http://192.168.100.73/task_management_systems_api/gettaskcategory.php";
+          "http://10.5.116.179/task_management_systems_api/gettaskcategory.php";
 
       var categoryResponse = await http.post(Uri.parse(categoryUri), body: {
         "Users_Id": userId.toString(),
@@ -74,7 +74,7 @@ Future<void> getTaskCategory(BuildContext context) async {
 Future<Map<String, dynamic>> searchTask(int userId, String taskName) async {
   try {
     String searchUri =
-        "http://192.168.100.73/task_management_systems_api/searchtask.php";
+        "http://10.5.116.179/task_management_systems_api/searchtask.php";
 
     var searchResponse = await http.post(Uri.parse(searchUri), body: {
       'Title': taskName,

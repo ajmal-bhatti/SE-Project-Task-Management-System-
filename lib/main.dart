@@ -14,6 +14,7 @@ void main() {
   runApp(const MyApp());
 }
 
+//This functoion is used to show the alert dialog
 void showTextDialog(BuildContext context, String text) {
   showDialog(
     context: context,
@@ -48,7 +49,7 @@ final TextEditingController Passwords = TextEditingController();
 String Emailz = Emails.text;
 String Passwordz = Passwords.text;
 final NotificationHelper notificationHelper = NotificationHelper();
-
+//This functoion is used to show the notification
 void showNotification(String title, String body) {
   notificationHelper.showNotification(
     title,
@@ -107,11 +108,12 @@ class _DashBoardScreenState extends State<DashBoardScreen>
     });
   }
 
+//This function to signin user
   Future<void> signinuser(BuildContext context) async {
     var response;
     if (Emailz != "" && Passwordz != "") {
       String apiUrl =
-          "http://192.168.100.73/task_management_systems_api/validuser.php";
+          "http://10.5.116.179/task_management_systems_api/validuser.php";
 
       try {
         response = await http.post(
@@ -154,6 +156,7 @@ class _DashBoardScreenState extends State<DashBoardScreen>
     }
   }
 
+//This function to get the task category
   Future<void> gettaskcategory(BuildContext context) async {
     List<Task> Taskz = [];
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -163,7 +166,7 @@ class _DashBoardScreenState extends State<DashBoardScreen>
 
     try {
       String uri =
-          "http://192.168.100.73/task_management_systems_api/gettaskcategory.php";
+          "http://10.5.116.179/task_management_systems_api/gettaskcategory.php";
       res = await http.post(Uri.parse(uri), body: {
         "Users_Id": Users_Id.toString(),
       });
@@ -186,7 +189,7 @@ class _DashBoardScreenState extends State<DashBoardScreen>
           if (Users_Id != 0 && task_name != "") {
             try {
               String uri =
-                  "http://192.168.100.73/task_management_systems_api/searchtask.php";
+                  "http://10.5.116.179/task_management_systems_api/searchtask.php";
               response = await http.post(
                 Uri.parse(uri),
                 body: {
@@ -238,6 +241,7 @@ class _DashBoardScreenState extends State<DashBoardScreen>
     }
   }
 
+//This function is used to signup user
   void signupuser(BuildContext context) {
     Navigator.push(
       context,

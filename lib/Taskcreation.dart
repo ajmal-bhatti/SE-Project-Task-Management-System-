@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// This function is used to show the alert dialog box
 void showTextDialog(BuildContext context, String text) {
   showDialog(
     context: context,
@@ -58,6 +59,7 @@ void showTextDialog(BuildContext context, String text) {
   );
 }
 
+//This function is used to select the time
 Future<TimeOfDay?> selectTime(BuildContext context) async {
   TimeOfDay? selectedTime = TimeOfDay.now();
 
@@ -69,6 +71,7 @@ Future<TimeOfDay?> selectTime(BuildContext context) async {
   return selectedTime;
 }
 
+//This function is used to create the task
 Future<void> createtask(BuildContext context) async {
   int priority = 0;
   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -91,7 +94,7 @@ Future<void> createtask(BuildContext context) async {
       }
 
       String uri =
-          "http://192.168.100.73/task_management_systems_api/inserttask.php";
+          "http://10.5.116.179/task_management_systems_api/inserttask.php";
       res = await http.post(Uri.parse(uri), body: {
         "Title": Title.text,
         "Description": Description.text,
@@ -115,7 +118,7 @@ Future<void> createtask(BuildContext context) async {
       showTextDialog(context, e.toString());
       print(resp.body);
       String uris =
-          "http://192.168.100.73/task_management_systems_api/insertlog.php";
+          "http://10.5.116.179/task_management_systems_api/insertlog.php";
       var res = await http.post(Uri.parse(uris), body: {
         "Log_Title": resp.body.toString(),
         "From_Table": "Task",
@@ -126,6 +129,7 @@ Future<void> createtask(BuildContext context) async {
   }
 }
 
+//This function is used to select the date
 Future<DateTime?> selectDate(BuildContext context) async {
   DateTime? selectedDate = DateTime.now();
 

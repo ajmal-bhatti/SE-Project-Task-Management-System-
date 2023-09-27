@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+//This function is used to select the date
 Future<DateTime?> selectDate(BuildContext context) async {
   DateTime? selectedDate = DateTime.now();
 
@@ -49,6 +50,7 @@ Future<DateTime?> selectDate(BuildContext context) async {
   return selectedDate;
 }
 
+//This function is used to show the alert dialog
 void showTextDialog(BuildContext context, String text) {
   showDialog(
     context: context,
@@ -94,7 +96,7 @@ Future<void> givedata(String selectedtask, String selectedcategory) async {
       dateController.text != "") {
     try {
       String uri =
-          "http://192.168.100.73/task_management_systems_api/inserttaskcategory.php";
+          "http://10.5.116.179/task_management_systems_api/inserttaskcategory.php";
       res = await http.post(Uri.parse(uri), body: {
         "task_name": selectedtask,
         "task_category": selectedcategory,
@@ -113,7 +115,7 @@ Future<void> givedata(String selectedtask, String selectedcategory) async {
       print(e.toString());
       print(resp.body);
       String uris =
-          "http://192.168.100.73/task_management_systems_api/insertlog.php";
+          "http://10.5.116.179/task_management_systems_api/insertlog.php";
       var res = await http.post(Uri.parse(uris), body: {
         "Log_Title": resp.body.toString(),
         "From_Table": "Task_Category",
@@ -151,6 +153,7 @@ class _TaskSelectionScreenState extends State<TaskSelectionScreen> {
     );
   }
 
+//This function is used to fetch the data from the database
   Future<void> fetchData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int userId = prefs.getInt('Id') ?? 0;
@@ -159,7 +162,7 @@ class _TaskSelectionScreenState extends State<TaskSelectionScreen> {
     if (userId != 0) {
       try {
         String uri =
-            "http://192.168.100.73/task_management_systems_api/gettask.php";
+            "http://10.5.116.179/task_management_systems_api/gettask.php";
         res = await http.post(Uri.parse(uri), body: {
           "Users_Id": userId.toString(),
         });
@@ -184,7 +187,7 @@ class _TaskSelectionScreenState extends State<TaskSelectionScreen> {
         print(e);
         print(response?.body);
         String uris =
-            "http://192.168.100.73/task_management_systems_api/insertlog.php";
+            "http://10.5.116.179/task_management_systems_api/insertlog.php";
         var res = await http.post(Uri.parse(uris), body: {
           "Log_Title": resp.body.toString(),
           "From_Table": "Task",
@@ -195,6 +198,7 @@ class _TaskSelectionScreenState extends State<TaskSelectionScreen> {
     }
   }
 
+//This function is used to fetch the data from the database
   Future<void> fetchData1() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int userId = prefs.getInt('Id') ?? 0;
@@ -203,7 +207,7 @@ class _TaskSelectionScreenState extends State<TaskSelectionScreen> {
     if (userId != 0) {
       try {
         String uri =
-            "http://192.168.100.73/task_management_systems_api/getcategory.php";
+            "http://10.5.116.179/task_management_systems_api/getcategory.php";
         res = await http.post(Uri.parse(uri), body: {
           "Users_Id": userId.toString(),
         });
@@ -228,7 +232,7 @@ class _TaskSelectionScreenState extends State<TaskSelectionScreen> {
         print(e);
         print(response?.body);
         String uris =
-            "http://192.168.100.73/task_management_systems_api/insertlog.php";
+            "http://10.5.116.179/task_management_systems_api/insertlog.php";
         var res = await http.post(Uri.parse(uris), body: {
           "Log_Title": resp.body.toString(),
           "From_Table": "Category",
