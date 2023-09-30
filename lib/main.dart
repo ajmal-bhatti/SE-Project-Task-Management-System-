@@ -108,54 +108,6 @@ class _DashBoardScreenState extends State<DashBoardScreen>
     });
   }
 
-//This function to signin user
-  Future<void> signinuser(BuildContext context) async {
-    var response;
-    if (Emailz != "" && Passwordz != "") {
-      String apiUrl =
-          "http://192.168.100.73/task_management_systems_api/validuser.php";
-
-      try {
-        response = await http.post(
-          Uri.parse(apiUrl),
-          body: {
-            'Email': Emails.text,
-            'Password': Passwords.text,
-          },
-        );
-        var resp = jsonDecode(response.body);
-        if (resp["Exists"] == "true") {
-          var Id = resp["Id"];
-          var Firstname = resp["FirstName"];
-          var Lastname = resp["LastName"];
-          var Created_At = resp["Created_At"] as String;
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-          await prefs.setInt('Id', Id);
-          await prefs.setString('Email', Emails.text);
-          await prefs.setString('Password', Passwords.text);
-          await prefs.setString('FirstName', Firstname);
-          await prefs.setString('LastName', Lastname);
-          await prefs.setString('Created_At', Created_At);
-
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => DashboardPage(),
-            ),
-          );
-          showTextDialog(context, "Valid User");
-          showNotification("Alert", "Someone Logged In Your Account");
-        }
-        if (resp["Exists"] == "false") {
-          showTextDialog(context, "InValid User");
-        }
-      } catch (e) {
-        showTextDialog(context, e.toString());
-        print(response.body);
-      }
-    }
-  }
-
 //This function to get the task category
   Future<void> gettaskcategory(BuildContext context) async {
     List<Task> Taskz = [];
