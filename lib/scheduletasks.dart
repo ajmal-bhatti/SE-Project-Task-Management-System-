@@ -6,34 +6,6 @@ import 'dart:convert';
 import 'package:app/main.dart';
 
 //this is the Delete schedule task function
-void deleteschedule(BuildContext context, String created_at) async {
-  var dp;
-  var dps;
-  try {
-    String uri =
-        "http://192.168.100.73/task_management_systems_api/deletescheduletask.php";
-    dp = await http.post(Uri.parse(uri), body: {
-      "created_at": created_at.toString(),
-    });
-    dps = jsonDecode(dp.body);
-    if (dps["success"] == "true") {
-      print("Task Deleted");
-    }
-    if (dps["success"] == "false") {
-      print("Task Not Deleted");
-    }
-  } catch (e) {
-    print(e.toString());
-    print(dps.body);
-
-    String uris =
-        "http://192.168.100.73/task_management_systems_api/insertlog.php";
-    var res = await http.post(Uri.parse(uris), body: {
-      "Log_Title": dps.body.toString(),
-      "From_Table": "Schedule_Task",
-    });
-  }
-}
 
 class ScheduleTasks extends StatelessWidget {
   final List<Task> tasks;
