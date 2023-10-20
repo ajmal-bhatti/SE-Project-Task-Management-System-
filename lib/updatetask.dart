@@ -122,6 +122,65 @@ void showTextDialog(BuildContext context, String text) {
   );
 }
 
+Future<void> updateTasks(BuildContext context) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  int Users_Id = prefs.getInt('Id') ?? 0;
+
+  var res;
+  if (titleController.text != "" &&
+      descriptionController.text != "" &&
+      dateController.text != "" &&
+      timeController.text != "" &&
+      selectedPriority != "" &&
+      Users_Id != 0) {
+    try {
+      String uri =
+          "http://192.168.100.73/task_management_systems_api/updatetask.php";
+      res = await http.post(Uri.parse(uri), body: {
+        "Task_Id": Task_Id.toString(),
+        "Old_Title": Title.toString(),
+        "Old_Description": Description.toString(),
+        "Old_Due_Date": Date.toString(),
+        "Old_Time": Time.toString(),
+        "Old_Priority": Priority.toString(),
+        "New_Title": titleController.text,
+        "New_Description": descriptionController.text,
+        "New_Due_Date": dateController.text,
+        "New_Time": timeController.text,
+        "New_Priority": selectedPriority,
+        "Created_At": Created_At.toString(),
+        "Users_Id": Users_Id.toString(),
+      });
+      var resp = jsonDecode(res.body);
+      if (resp["success"] == "true" && resp["Exist"] == "false") {
+        showTextDialog(context, "Task Updated Successfully");
+
+        titleController.text = "";
+        descriptionController.text = "";
+        dateController.text = "";
+        timeController.text = "";
+        selectedPriority = "";
+      }
+      if (resp["success"] == "false" && resp["Exist"] == "false") {
+        showTextDialog(context, "Something went wrong");
+      }
+      if (resp["success"] == "false" && resp["Exist"] == "true") {
+        showTextDialog(context, "Task of same Title already Existed");
+      }
+    } catch (e) {
+      showTextDialog(context, e.toString());
+      String uris =
+          "http://192.168.100.73/task_management_systems_api/insertlog.php";
+      var res = await http.post(Uri.parse(uris), body: {
+        "Log_Title": e.toString(),
+        "From_Table": "Task",
+      });
+    }
+  } else {
+    showTextDialog(context, "Please fill all the fields");
+  }
+}
+
 class TaskUpdateScreen extends StatefulWidget {
   @override
   _TaskUpdateScreenState createState() => _TaskUpdateScreenState();
