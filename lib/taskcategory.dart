@@ -50,36 +50,6 @@ Future<DateTime?> selectDate(BuildContext context) async {
   return selectedDate;
 }
 
-//This function is used to show the alert dialog
-void showTextDialog(BuildContext context, String text) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Row(
-          children: [
-            Icon(
-              Icons.error,
-              color: Colors.red,
-            ),
-            SizedBox(width: 8),
-            Text('Alert'),
-          ],
-        ),
-        content: Text(text),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(); // Close the dialog
-            },
-            child: Text('OK'),
-          ),
-        ],
-      );
-    },
-  );
-}
-
 var resp;
 String task = "";
 String category = "";

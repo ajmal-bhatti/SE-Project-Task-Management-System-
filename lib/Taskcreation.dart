@@ -129,6 +129,30 @@ Future<void> createtask(BuildContext context) async {
   }
 }
 
+//This function is used to select the date
+Future<DateTime?> selectDate(BuildContext context) async {
+  DateTime? selectedDate = DateTime.now();
+
+  await showDatePicker(
+    context: context,
+    initialDate: selectedDate!,
+    firstDate: DateTime(2000),
+    lastDate: DateTime(2101),
+    builder: (BuildContext context, Widget? child) {
+      return Theme(
+        data: ThemeData.light(), // You can customize the theme if needed
+        child: child!,
+      );
+    },
+  ).then((pickedDate) {
+    if (pickedDate != null && pickedDate != selectedDate) {
+      selectedDate = pickedDate;
+    }
+  });
+
+  return selectedDate;
+}
+
 class TaskCreationScreen extends StatefulWidget {
   @override
   _TaskCreationScreenState createState() => _TaskCreationScreenState();
