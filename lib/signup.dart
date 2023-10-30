@@ -67,49 +67,6 @@ class _SignupPageState extends State<SignupPage> {
     );
   }
 
-//This function is used to signup the user
-  Future<void> _handleSignup() async {
-    var res;
-    if (Email.text != "" &&
-        Password.text != "" &&
-        First_Name.text != "" &&
-        Last_Name.text != "") {
-      try {
-        String uri =
-            "http://192.168.100.73/task_management_systems_api/insertuser.php";
-        res = await http.post(Uri.parse(uri), body: {
-          "Email": Email.text,
-          "Password": Password.text,
-          "First_Name": First_Name.text,
-          "Last_Name": Last_Name.text,
-        });
-        var resp = jsonDecode(res.body);
-        if (resp["success"] == "true" && resp["Exist"] == "false") {
-          showTextDialog(context, "User Registered Successfully");
-          showNotification(
-              "Account Created Successfully using Emial", Email.text);
-          Email.text = "";
-          Password.text = "";
-          First_Name.text = "";
-          Last_Name.text = "";
-        }
-        if (resp["Exist"] == "true" && resp["success"] == "false") {
-          showTextDialog(context, "Email Already Exists");
-        }
-      } catch (e) {
-        showTextDialog(context, e.toString());
-      }
-    } else {
-      showTextDialog(context, "Please fill all the fields");
-      String uris =
-          "http://192.168.100.73/task_management_systems_api/insertlog.php";
-      var res = await http.post(Uri.parse(uris), body: {
-        "Log_Title": resp.body.toString(),
-        "From_Table": "Users",
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
